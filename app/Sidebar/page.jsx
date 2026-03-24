@@ -29,11 +29,8 @@ const sidebarItems = [
   { label: 'TRR Pages', icon: <Settings />, path: '/TRR' },
   { label: 'Post & Schedual', icon: <Money />, path: '/Post' },
   { label: 'Active Users', icon: <SyncAlt />, path: '/Users' },
-  { label: '', icon: <Description />, path: '/quotations' },
-  { label: 'Purchase', icon: <ShoppingCart />, path: '/purchase' },
-  { label: 'Sales', icon: <PointOfSale />, path: '/sales' },
-  { label: 'Sales Returns', icon: <AssignmentReturn />, path: '/sales-returns' },
-  { label: 'Purchase Returns', icon: <AssignmentReturn />, path: '/purchase-returns' },
+  { label: 'Complain', icon: <Description />, path: '/quotations' },
+  { label: 'Suggestion', icon: <ShoppingCart />, path: '/purchase' },
   { label: 'Reviews', icon: <Reviews />, path: '/reviews' },
   { label: 'Reports', icon: <Assessment />, path: '/reports' },
 ];
