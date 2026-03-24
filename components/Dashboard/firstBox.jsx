@@ -53,7 +53,7 @@ export default function FirstBox() {
                 >
                     <ReplayIcon fontSize="large" color="secondary" />
                     <Box>
-                        <Typography variant="subtitle1" color='gray'>Sales Return</Typography>
+                        <Typography variant="subtitle1" color='gray'>TRR Pages</Typography>
                         <Typography variant="h6" sx={{ textAlign: 'end' }}>5000</Typography>
                     </Box>
                 </Paper>
