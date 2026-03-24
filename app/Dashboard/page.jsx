@@ -5,7 +5,7 @@ import Sale from '../../components/Dashboard/firstBox.jsx';
 import Pi from '../../components/Dashboard/pi&barcharts.jsx';
 import Stock from '../../components/Dashboard/stock.jsx';
 import SalesTarget from '../../components/Dashboard/saletarget.jsx';
-import Invoice from '../../components/Dashboard/invoice.jsx';
+import Pages from '../../components/Dashboard/FBpages.jsx';
 import Recent from '../../components/Dashboard/recentsales.jsx';
 
 export default function page() {
@@ -15,7 +15,7 @@ export default function page() {
       <Pi />
       <Stock />
       <SalesTarget />
-      <Invoice />
+      <Pages />
       <Recent />
     </div>
   )

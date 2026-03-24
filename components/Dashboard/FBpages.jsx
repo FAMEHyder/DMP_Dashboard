@@ -33,17 +33,19 @@ const InvoiceTable = () => {
   return (
     <Box ml={2} mt={2} mb={2}>
       <Typography variant="h6" fontWeight="bold" gutterBottom>
-        Invoice Table
+        Connected Facebook Pages
       </Typography>
 
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell><strong>Reference Code</strong></TableCell>
-              <TableCell><strong>Customer</strong></TableCell>
-              <TableCell><strong>Amount</strong></TableCell>
-              <TableCell><strong>Status</strong></TableCell>
+              <TableCell><strong>Page Number</strong></TableCell>
+              <TableCell><strong>Page Name</strong></TableCell>
+              <TableCell><strong>Connected Date</strong></TableCell>
+              <TableCell><strong>Expiry Date</strong></TableCell>
+              <TableCell><strong>Days Left</strong></TableCell>
+              <TableCell><strong>Token Rotate</strong></TableCell>
             </TableRow>
           </TableHead>
 

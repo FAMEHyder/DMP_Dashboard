@@ -4,11 +4,18 @@ import { Box, Grid, Paper, Typography, Table, TableBody, TableCell, TableHead, T
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
 const stockData = [
-  { code: '87305928', product: 'Smartphone', warehouse: 'Warehouse 02', quantity: 5, alert: 10 },
-  { code: '87305912', product: 'Mask', warehouse: 'Warehouses 02', quantity: 10, alert: 5 },
-  { code: '87305452', product: 'Laptop', warehouse: 'Warehouse 01', quantity: 100, alert: 5 },
-  { code: '87305231', product: 'Earphone', warehouse: 'Warehouse 03', quantity: 10, alert: 50 },
-  { code: '87305452', product: 'Laptop', warehouse: 'Warehouse 01', quantity: 100, alert: 5 },
+  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
+  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
+  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
+  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
+  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
+  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
+  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
+  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
+  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
+  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
+  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
+
 ];
 
 const pieData = [
@@ -29,27 +36,27 @@ export default function DashboardPage() {
         <Grid item xs={12} md={6}>
           <Paper elevation={3} sx={{ p: 2 }}>
             <Typography variant="h6" fontWeight="bold" gutterBottom>
-              Stock Alert
+              Active Users
             </Typography>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>CODE</TableCell>
-                  <TableCell>PRODUCT</TableCell>
-                  <TableCell>WAREHOUSE</TableCell>
-                  <TableCell>QUANTITY</TableCell>
-                  <TableCell>ALERT QUANTITY</TableCell>
+                  <TableCell>User Name</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>Phone Number</TableCell>
+                  <TableCell>Address</TableCell>
+                  <TableCell>Status</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {stockData.map((row, idx) => (
                   <TableRow key={idx}>
-                    <TableCell>{row.code}</TableCell>
-                    <TableCell>{row.product}</TableCell>
-                    <TableCell>{row.warehouse}</TableCell>
-                    <TableCell>{String(row.quantity).padStart(2, '0')}</TableCell>
+                    <TableCell>{row.UserName}</TableCell>
+                    <TableCell>{row.email}</TableCell>
+                    <TableCell>{row.phoneNumber}</TableCell>
+                    <TableCell>{row.Adress}</TableCell>
+                    <TableCell>{row.status}</TableCell>
                     <TableCell sx={{ color: 'red', fontWeight: 'bold' }}>
-                      {String(row.alert).padStart(2, '0')}
                     </TableCell>
                   </TableRow>
                 ))}
