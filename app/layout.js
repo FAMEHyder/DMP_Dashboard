@@ -1,5 +1,4 @@
 import Header from "./header/page.jsx";
-import Footer from "./Footer/page.jsx";
 import Sidebar from "./Sidebar/page.jsx";
 import { Box } from '@mui/material';
 
@@ -25,7 +24,7 @@ export default function RootLayout({ children }) {
 
         </Box>
 
-        <Footer />
+        
       </body>
     </html>
   );

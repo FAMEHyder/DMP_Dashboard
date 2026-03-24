@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Box, Typography, List, ListItem, ListItemText, Divider, TextField,
-  FormControl, InputLabel, OutlinedInput, Select, MenuItem, Button, Grid, Tabs, Tab, Avatar, } from "@mui/material";
+import { Box, Typography, TextField,
+  FormControl, InputLabel, OutlinedInput, Select, MenuItem, Button, Grid, Tabs, Tab, } from "@mui/material";
 import CreatePostModal from "../Post_Model/page.jsx";
 
 
