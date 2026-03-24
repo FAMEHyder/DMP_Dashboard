@@ -80,10 +80,10 @@ const ConnectedPages = () => {
   const [connect] = useState([
     { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft: "60 days", rotate: "Rotated" },
     { PageNumber: '2', PageName: 'Ali Store', connectAt: "01-03-2026", expiresOn: "01-04-2026", DaysLeft: "5 days", rotate: "Rotate Now" },
-    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft: "34 days", rotate: "Rotated" },
-    { PageNumber: '2', PageName: 'Ali Store', connectAt: "01-03-2026", expiresOn: "01-04-2026", DaysLeft: "5 days", rotate: "Rotate Now" },
-    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft: "30 days", rotate: "Rotated" },
-    { PageNumber: '2', PageName: 'Ali Store', connectAt: "01-03-2026", expiresOn: "01-04-2026", DaysLeft: "5 days", rotate: "Rotate Now" },
+    { PageNumber: '3', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft: "34 days", rotate: "Rotated" },
+    { PageNumber: '4', PageName: 'Ali Store', connectAt: "01-03-2026", expiresOn: "01-04-2026", DaysLeft: "5 days", rotate: "Rotate Now" },
+    { PageNumber: '5', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft: "30 days", rotate: "Rotated" },
+    { PageNumber: '6', PageName: 'Ali Store', connectAt: "01-03-2026", expiresOn: "01-04-2026", DaysLeft: "5 days", rotate: "Rotate Now" },
   ]);
 
   return (
@@ -108,7 +108,7 @@ const ConnectedPages = () => {
           }}
         >
           <TableHead>
-            <TableRow sx={{ backgroundColor: '#1976d2' }}>
+            <TableRow sx={{ backgroundColor: "#09362f"}}>
               {["Page #", "Page Name", "Connected On", "Expires On", "Days Left", "Token Rotate"].map((head) => (
                 <TableCell
                   key={head}

@@ -1,7 +1,7 @@
 import Header from "./header/page.jsx";
 import Sidebar from "./Sidebar/page.jsx";
-import { Box } from '@mui/material';
-
+import { Box, Typography } from '@mui/material';
+import "./layout.css"
 
 
 export default function RootLayout({ children }) {
@@ -20,7 +20,10 @@ export default function RootLayout({ children }) {
 
 
           {/* The main component */}
-          <Box width={'100%'} ml={20}>{children}</Box>
+
+          <Box width={'100%'} ml={25} mt={5}>
+            <Typography fontSize={25} fontWeight={600} textAlign={"center"} color="white">Dashboard</Typography>
+            {children}</Box>
 
         </Box>
 

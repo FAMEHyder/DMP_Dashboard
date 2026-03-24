@@ -16,8 +16,6 @@ import {
   Money,
   Description,
   ShoppingCart,
-  PointOfSale,
-  AssignmentReturn,
   Reviews,
   Assessment
 } from '@mui/icons-material';
@@ -42,8 +40,8 @@ const Sidebar = () => {
     <>
     <Box position={'fixed'}
       sx={{
-        width: 150,
-        bgcolor: '#f5f5f5',
+        width: 200,
+        bgcolor: "#09362f",
         borderRight: '1px solid #ccc',
         height: '100vh',             // Use full viewport height
         overflowY: 'auto', 

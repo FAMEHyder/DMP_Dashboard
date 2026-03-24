@@ -1,60 +1,88 @@
+
 'use client';
 
-import { Box, Grid, Paper, Typography, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import React, { useState } from 'react';
+import {
+  Box,
+  Table, TableBody, TableCell, TableContainer, TableHead,
+  TableRow, Paper, Typography, Chip
+} from '@mui/material';
 
-const stockData = [
-  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
-  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
-  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
-  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
-  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
-  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
-  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
-  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
-  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
-  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
-  { UserName: 'M ali', email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd", status : "Active"},
+const ConnectedPages = () => {
+  const [connect] = useState([
+    { SerialNo :"1", FullName:"M ali" ,UserName: 'lee',Gender :"male", email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd",},
+    { SerialNo :"2", FullName:"M ali" ,UserName: 'lee',Gender :"male", email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd",},
+    { SerialNo :"3", FullName:"M ali" ,UserName: 'lee',Gender :"male", email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd",},
+    { SerialNo :"4", FullName:"M ali" ,UserName: 'lee',Gender :"male", email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd",},
+    { SerialNo :"5", FullName:"M ali" ,UserName: 'lee',Gender :"male", email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd",},
+    { SerialNo :"6", FullName:"M ali" ,UserName: 'lee',Gender :"male", email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd",},
 
-];
+  ]);
 
-
-export default function DashboardPage() {
   return (
-    <Box ml={2} mt={2} >
-      <Grid container spacing={4} >
-        <Grid item xs={12} md={6} width={"100%"}>
-          <Paper elevation={3} sx={{ p: 2 }}>
-            <Typography variant="h6" fontWeight="bold" gutterBottom>
-              Active Users
-            </Typography>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>User Name</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Phone Number</TableCell>
-                  <TableCell>Address</TableCell>
-                  <TableCell>Status</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {stockData.map((row, idx) => (
-                  <TableRow key={idx}>
-                    <TableCell>{row.UserName}</TableCell>
-                    <TableCell>{row.email}</TableCell>
-                    <TableCell>{row.phoneNumber}</TableCell>
-                    <TableCell>{row.Adress}</TableCell>
-                    <TableCell>{row.status}</TableCell>
-                    <TableCell sx={{ color: 'red', fontWeight: 'bold' }}>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </Paper>
-        </Grid>
+    <Box m={3}>
+      <Typography variant="h5" fontWeight="bold" mb={2} textAlign={"center"}>
+        Active Users
+      </Typography>
 
-      </Grid>
+      <TableContainer
+        component={Paper}
+        sx={{
+          boxShadow: "2px 2px 2px 2px gray",
+        }}
+      >
+        <Table
+          sx={{
+            border: '1px solid #ccc',
+            borderCollapse: 'collapse',
+            '& th, & td': {
+              border: '1px solid #ccc',
+            },
+          }}
+        >
+          <TableHead>
+            <TableRow sx={{ backgroundColor: "#09362f"}}>
+              {["S No. #", "Full Name", "User Name","Gender" , "Email", "Phone Number", "Address"].map((head) => (
+                <TableCell
+                  key={head}
+                  sx={{
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    border: '1px solid #ccc', // ensure header borders
+                  }}
+                >
+                  {head}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+
+          <TableBody>
+            {connect.map((row, index) => (
+              <TableRow
+                key={index}
+                sx={{
+                  backgroundColor: index % 2 === 0 ? '#f9f9f9' : '#fff',
+                  '&:hover': {
+                    backgroundColor: '#e3f2fd',
+                  },
+                }}
+              >
+                <TableCell align="center">{row.SerialNo}</TableCell>
+                <TableCell align="center">{row.FullName}</TableCell>
+                <TableCell align="center">{row.UserName}</TableCell>
+                <TableCell align="center">{row.Gender}</TableCell>
+                <TableCell align="center">{row.email}</TableCell>
+                <TableCell align="center">{row.phoneNumber}</TableCell>
+                <TableCell align="center">{row.Adress}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
   );
-}
+};
+
+export default ConnectedPages;
