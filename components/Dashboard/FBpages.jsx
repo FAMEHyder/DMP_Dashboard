@@ -7,28 +7,24 @@ import {
   TableRow, Paper, Typography, Select, MenuItem
 } from '@mui/material';
 
-const InvoiceTable = () => {
-  const [invoices, setInvoices] = useState([
-    { ref: 'INV001', customer: 'John Doe', amount: 200, status: 'Paid' },
-    { ref: 'INV002', customer: 'Jane Smith', amount: 450, status: 'Due' },
-    { ref: 'INV003', customer: 'Ahmed Khan', amount: 300, status: 'Paid' },
-    { ref: 'INV004', customer: 'Fatima Noor', amount: 150, status: 'Due' },
-    { ref: 'INV005', customer: 'Ali Rehman', amount: 600, status: 'Paid' },
+const connectedPages = () => {
+  const [connect, setconnect] = useState([
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft:"60 days" ,rotate:"yes"},
+
   ]);
-
-  const handleStatusChange = (event, index) => {
-    const updatedInvoices = [...invoices];
-    updatedInvoices[index].status = event.target.value;
-    setInvoices(updatedInvoices);
-  };
-
-  const getColorStyles = (status) => {
-    return {
-      color: status === 'Paid' ? 'green' : 'red',
-      fontWeight: 'bold',
-      borderColor: status === 'Paid' ? 'green' : 'red',
-    };
-  };
 
   return (
     <Box ml={2} mt={2} mb={2}>
@@ -42,31 +38,23 @@ const InvoiceTable = () => {
             <TableRow>
               <TableCell><strong>Page Number</strong></TableCell>
               <TableCell><strong>Page Name</strong></TableCell>
-              <TableCell><strong>Connected Date</strong></TableCell>
-              <TableCell><strong>Expiry Date</strong></TableCell>
+              <TableCell><strong>Connected On</strong></TableCell>
+              <TableCell><strong>Expirs On</strong></TableCell>
               <TableCell><strong>Days Left</strong></TableCell>
               <TableCell><strong>Token Rotate</strong></TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {invoices.map((invoice, index) => (
-              <TableRow key={invoice.ref}>
-                <TableCell>{invoice.ref}</TableCell>
-                <TableCell>{invoice.customer}</TableCell>
-                <TableCell>${invoice.amount}</TableCell>
-                <TableCell>
-                  <Select
-                    value={invoice.status}
-                    onChange={(e) => handleStatusChange(e, index)}
-                    size="small"
-                    fullWidth
-                    sx={getColorStyles(invoice.status)}
-                  >
-                    <MenuItem value="Paid">Paid</MenuItem>
-                    <MenuItem value="Due">Due</MenuItem>
-                  </Select>
-                </TableCell>
+            {connect.map((connects, index) => (
+              <TableRow key={connects.PageNumber}>
+                <TableCell>{connects.PageNumber}</TableCell>
+                <TableCell>{connects.PageName}</TableCell>
+                <TableCell>{connects.connectAt}</TableCell>
+                <TableCell>{connects.expiresOn}</TableCell>
+                <TableCell>{connects.DaysLeft}</TableCell>
+                <TableCell>{connects.rotate}</TableCell>
+                
               </TableRow>
             ))}
           </TableBody>
@@ -76,4 +64,4 @@ const InvoiceTable = () => {
   );
 };
 
-export default InvoiceTable;
+export default connectedPages;

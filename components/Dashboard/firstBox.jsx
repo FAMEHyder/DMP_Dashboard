@@ -21,7 +21,7 @@ export default function FirstBox() {
             }}
         >
             {/* Left Column */}
-            <Box sx={{ width: '48%', display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <Box sx={{ width: '48%', display: 'flex', flexDirection: 'column', gap: 2 , }}>
                 <Paper
                     elevation={3}
                     sx={{
@@ -30,7 +30,8 @@ export default function FirstBox() {
                         alignItems: 'center',
                         padding: 2,
                         gap: 2,
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between',
+                        boxShadow:"2px 2px 2px 2px gray"
                     }}
                 >
                     {/* <GroupsIcon fontSize="large" color="primary" /> */}
@@ -50,7 +51,9 @@ export default function FirstBox() {
                         alignItems: 'center',
                         padding: 2,
                         gap: 2,
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between',
+                        boxShadow:"2px 2px 2px 2px gray"
+
 
                     }}
                 >
@@ -72,7 +75,9 @@ export default function FirstBox() {
                         alignItems: 'center',
                         padding: 2,
                         gap: 2,
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between',
+                        boxShadow:"2px 2px 2px 2px gray"
+
 
                     }}
                 >
@@ -91,7 +96,9 @@ export default function FirstBox() {
                         alignItems: 'center',
                         padding: 2,
                         gap: 2,
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between',
+                        boxShadow:"2px 2px 2px 2px gray"
+
 
                     }}
                 >
