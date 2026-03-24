@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
       <body>
         <Header />
 
-        <Box display={'flex'}>
+        <Box display={'flex'} mt={4}>
 
           {/* To adjust the side bar  */}
           <Box>
