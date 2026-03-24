@@ -2,11 +2,12 @@
 
 import React from 'react';
 import { Box, Paper, Typography } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import GroupsIcon from '@mui/icons-material/Groups';
+import FacebookIcon from '@mui/icons-material/Facebook';
 import ReplayIcon from '@mui/icons-material/Replay';
-import LocalMallIcon from '@mui/icons-material/LocalMall';
 import UndoIcon from '@mui/icons-material/Undo';
-
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+// import PublicIcon from '@mui/icons-material/Public'; 
 export default function FirstBox() {
     return (
         <Box
@@ -32,9 +33,11 @@ export default function FirstBox() {
                         justifyContent: 'space-between'
                     }}
                 >
-                    <ShoppingCartIcon fontSize="large" color="primary" />
+                    {/* <GroupsIcon fontSize="large" color="primary" /> */}
+                    <FacebookIcon fontSize="large" color="primary" />
+                    {/* <PublicIcon fontSize="large" color="primary" /> */}
                     <Box>
-                        <Typography variant="subtitle1" color='gray'>Sales</Typography>
+                        <Typography variant="subtitle1" color='gray'>Connected Facebook Pages</Typography>
                         <Typography variant="h6" sx={{ textAlign: 'end' }}>5000</Typography>
                     </Box>
                 </Paper>
@@ -53,7 +56,7 @@ export default function FirstBox() {
                 >
                     <ReplayIcon fontSize="large" color="secondary" />
                     <Box>
-                        <Typography variant="subtitle1" color='gray'>TRR Pages</Typography>
+                        <Typography variant="subtitle1" color='gray'>Token Rotation Required Pages</Typography>
                         <Typography variant="h6" sx={{ textAlign: 'end' }}>5000</Typography>
                     </Box>
                 </Paper>
@@ -73,9 +76,9 @@ export default function FirstBox() {
 
                     }}
                 >
-                    <LocalMallIcon fontSize="large" color="success" />
+                    <GroupsIcon fontSize="large" color="success" />
                     <Box >
-                        <Typography variant="subtitle1" color='gray'>Purchase</Typography>
+                        <Typography variant="subtitle1" color='gray'>Active Users</Typography>
                         <Typography variant="h6" sx={{ textAlign: 'end' }}>5000</Typography>
                     </Box>
                 </Paper>
@@ -92,9 +95,9 @@ export default function FirstBox() {
 
                     }}
                 >
-                    <UndoIcon fontSize="large" color="error" />
+                    <AccessTimeIcon fontSize="large" color="error" />
                     <Box>
-                        <Typography variant="subtitle1" color='gray'>Purchase Return</Typography>
+                        <Typography variant="subtitle1" color='gray'>Expired pages</Typography>
                         <Typography variant="h6" sx={{ textAlign: 'end' }}>5000</Typography>
                     </Box>
                 </Paper>
