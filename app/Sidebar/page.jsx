@@ -25,10 +25,10 @@ import Link from 'next/link';
 
 const sidebarItems = [
   { label: 'Dashboard', icon: <Dashboard />, path: '/Dashboard' },
-  { label: 'Connected Pages', icon: <Inventory />, path: '/product' },
-  { label: 'TRR Pages', icon: <Settings />, path: '/adjustments' },
-  { label: 'Post & Schedual', icon: <Money />, path: '/expenses' },
-  { label: '', icon: <SyncAlt />, path: '/transfer' },
+  { label: 'Connected Pages', icon: <Inventory />, path: '/Pages' },
+  { label: 'TRR Pages', icon: <Settings />, path: '/TRR' },
+  { label: 'Post & Schedual', icon: <Money />, path: '/Post' },
+  { label: 'Active Users', icon: <SyncAlt />, path: '/Users' },
   { label: '', icon: <Description />, path: '/quotations' },
   { label: 'Purchase', icon: <ShoppingCart />, path: '/purchase' },
   { label: 'Sales', icon: <PointOfSale />, path: '/sales' },
