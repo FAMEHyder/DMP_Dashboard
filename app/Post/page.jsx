@@ -122,30 +122,6 @@ const BufferStyleScheduler = () => {
 
   return (
     <Grid container sx={{ height: "90vh", mt: 6 }}>
-      {/* ===== Sidebar ===== */}
-      <Grid
-        item
-        xs={12}
-        md={3}
-        sx={{
-          borderRight: "1px solid #4e4949",
-          height: "100%",
-          overflowY: "auto",
-        }}
-      >
-        <Box sx={{ p: 2 }}>
-          <Typography variant="h6">Channels</Typography>
-          <List>
-            {pages.map(p => (
-              <ListItem key={p.pageId}>
-                <Avatar sx={{ mr: 1 }}>{p.pageName[0]}</Avatar>
-                <ListItemText primary={p.pageName} />
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </Grid>
-
       {/* ===== Main ===== */}
       <Grid item xs={12} md={9} sx={{ p: 3, width: '75%' }}>
         <Typography variant="h5" fontWeight={700}>
