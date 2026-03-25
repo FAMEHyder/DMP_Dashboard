@@ -42,9 +42,9 @@ const Sidebar = () => {
       sx={{
         width: 200,
         bgcolor: "#09362f",
-        borderRight: '1px solid #ccc',
+        borderRight: '1px solid #09362f',
         height: '100vh',             // Use full viewport height
-        overflowY: 'auto', 
+        overflowY: 'auto ', 
         mb:2          // Enable vertical scroll
       }}
     >

@@ -31,16 +31,18 @@ export default function FirstBox() {
                         alignItems: 'center',
                         padding: 2,
                         gap: 2,
+                        // bgcolor: "#09362f",
+                        background: "#09362e",
                         justifyContent: 'space-between',
-                        boxShadow:"2px 2px 2px 2px gray"
+                        boxShadow:"2px 2px 2px 2px black"
                     }}
                 >
                     {/* <GroupsIcon fontSize="large" color="primary" /> */}
                     <FacebookIcon fontSize="large" color="primary" />
                     {/* <PublicIcon fontSize="large" color="primary" /> */}
                     <Box>
-                        <Typography variant="subtitle1" color='gray'>Connected Facebook Pages</Typography>
-                        <Typography variant="h6" sx={{ textAlign: 'end' }}>5000</Typography>
+                        <Typography variant="subtitle1" color='primary' fontWeight={800}>Connected Facebook Pages</Typography>
+                        <Typography variant="h6" sx={{ textAlign: 'end' }} color='primary' fontWeight={800}>5000</Typography>
                     </Box>
                 </Paper>
 
@@ -52,16 +54,18 @@ export default function FirstBox() {
                         alignItems: 'center',
                         padding: 2,
                         gap: 2,
+                        bgcolor: "#09362f",
+
                         justifyContent: 'space-between',
-                        boxShadow:"2px 2px 2px 2px gray"
+                        boxShadow:"2px 2px 2px 2px black"
 
 
                     }}
                 >
                     <ReplayIcon fontSize="large" color="secondary" />
                     <Box>
-                        <Typography variant="subtitle1" color='gray'>Token Rotation Required Pages</Typography>
-                        <Typography variant="h6" sx={{ textAlign: 'end' }}>5000</Typography>
+                        <Typography variant="subtitle1" color='purple' fontWeight={800}>Token Rotation Required Pages</Typography>
+                        <Typography variant="h6" sx={{ textAlign: 'end' }} color='purple' fontWeight={800}>5000</Typography>
                     </Box>
                 </Paper>
             </Box>
@@ -76,16 +80,18 @@ export default function FirstBox() {
                         alignItems: 'center',
                         padding: 2,
                         gap: 2,
+                        bgcolor: "#09362f",
+
                         justifyContent: 'space-between',
-                        boxShadow:"2px 2px 2px 2px gray"
+                        boxShadow:"2px 2px 2px 2px black"
 
 
                     }}
                 >
                     <GroupsIcon fontSize="large" color="success" />
                     <Box >
-                        <Typography variant="subtitle1" color='gray'>Active Users</Typography>
-                        <Typography variant="h6" sx={{ textAlign: 'end' }}>5000</Typography>
+                        <Typography variant="subtitle1" color='green' fontWeight={800}>Active Users</Typography>
+                        <Typography variant="h6" sx={{ textAlign: 'end' }} color='green' fontWeight={800}>5000</Typography>
                     </Box>
                 </Paper>
 
@@ -97,16 +103,18 @@ export default function FirstBox() {
                         alignItems: 'center',
                         padding: 2,
                         gap: 2,
+                        bgcolor: "#09362f",
+
                         justifyContent: 'space-between',
-                        boxShadow:"2px 2px 2px 2px gray"
+                        boxShadow:"2px 2px 2px 2px black"
 
 
                     }}
                 >
                     <AccessTimeIcon fontSize="large" color="error" />
                     <Box>
-                        <Typography variant="subtitle1" color='gray'>Expired pages</Typography>
-                        <Typography variant="h6" sx={{ textAlign: 'end' }}>5000</Typography>
+                        <Typography variant="subtitle1" color='red' fontWeight={800}>Expired pages</Typography>
+                        <Typography variant="h6" sx={{ textAlign: 'end' }} color='red' fontWeight={800}>5000</Typography>
                     </Box>
                 </Paper>
             </Box>
