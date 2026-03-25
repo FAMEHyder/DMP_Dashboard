@@ -33,7 +33,7 @@ const ConnectedPages = () => {
             border: '1px solid #ccc',
             borderCollapse: 'collapse',
             '& th, & td': {
-              border: '1px solid #ccc',
+              border: '1px solid black',
             },
           }}
         >

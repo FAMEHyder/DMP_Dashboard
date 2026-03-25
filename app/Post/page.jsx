@@ -121,9 +121,9 @@ const BufferStyleScheduler = () => {
   };
 
   return (
-    <Grid container sx={{ height: "90vh", mt: 6 }}>
+    <Grid container sx={{ height: "72vh",width:"98%", mt: 1 ,boxShadow:"2px 2px 2px 2px gray"}}>
       {/* ===== Main ===== */}
-      <Grid item xs={12} md={9} sx={{ p: 3, width: '75%' }}>
+      <Grid item xs={12} md={9} sx={{ p: 3, width: '100%' }}>
         <Typography variant="h5" fontWeight={700}>
           Schedule a Post
         </Typography>

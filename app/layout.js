@@ -21,8 +21,8 @@ export default function RootLayout({ children }) {
 
           {/* The main component */}
 
-          <Box width={'100%'} ml={32} mt={4}>
-            <Typography fontSize={25} fontWeight={600} textAlign={"center"} color="Balck">Overview</Typography>
+          <Box width={'100%'} ml={32} mt={2}>
+            <Typography fontSize={25} fontWeight={600} textAlign={"center"} color="Balck">Sat-Tara</Typography>
             {children}</Box>
 
         </Box>

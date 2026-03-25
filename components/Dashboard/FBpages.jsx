@@ -32,7 +32,7 @@ const ConnectedPages = () => {
             border: '1px solid #ccc',
             borderCollapse: 'collapse',
             '& th, & td': {
-              border: '1px solid #ccc',
+              border: '1px solid black',
             },
           }}
         >
@@ -45,6 +45,8 @@ const ConnectedPages = () => {
                   fontWeight: 'bold',
                   fontSize: '18px',
                   backgroundColor: '#09362f',
+                  color: "white" 
+
                 }}
               >
                 Connected Facebook Pages
@@ -58,7 +60,7 @@ const ConnectedPages = () => {
                     color: '#fff',
                     fontWeight: 'bold',
                     textAlign: 'center',
-                    border: '1px solid #ccc', // ensure header borders
+                    border: '1px solid #ccc',
                   }}
                 >
                   {head}
