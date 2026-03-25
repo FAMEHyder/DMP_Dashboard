@@ -40,8 +40,10 @@ const Sidebar = () => {
     <>
     <Box position={'fixed'}
       sx={{
-        width: 200,
-        bgcolor: "#09362f",
+        width: 250,
+        bgcolor: "#ffffff",
+        // background: "linear-gradient(180deg, #1976d2, #0d47a1)",
+        // backgroundcolor: "#0D47A1",
         borderRight: '1px solid #09362f',
         height: '100vh',             // Use full viewport height
         overflowY: 'auto ', 
