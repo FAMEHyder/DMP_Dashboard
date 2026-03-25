@@ -20,9 +20,6 @@ const ConnectedPages = () => {
 
   return (
     <Box m={3}>
-      <Typography variant="h5" fontWeight="bold" mb={2} textAlign={"center"}>
-        Connected Facebook Pages
-      </Typography>
 
       <TableContainer
         component={Paper}
@@ -40,7 +37,20 @@ const ConnectedPages = () => {
           }}
         >
           <TableHead>
-            <TableRow sx={{ backgroundColor: "#09362f"}}>
+            <TableRow>
+              <TableCell
+                colSpan={6}
+                sx={{
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  fontSize: '18px',
+                  backgroundColor: '#09362f',
+                }}
+              >
+                Connected Facebook Pages
+              </TableCell>
+            </TableRow>
+            <TableRow sx={{ backgroundColor: "#09362f" }}>
               {["Page #", "Page Name", "Connected On", "Expires On", "Days Left", "Token Rotate"].map((head) => (
                 <TableCell
                   key={head}

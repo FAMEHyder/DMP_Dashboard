@@ -21,9 +21,6 @@ const ConnectedPages = () => {
 
   return (
     <Box m={3}>
-      <Typography variant="h5" fontWeight="bold" mb={2} textAlign={"center"}>
-        Active Users
-      </Typography>
 
       <TableContainer
         component={Paper}
@@ -41,6 +38,20 @@ const ConnectedPages = () => {
           }}
         >
           <TableHead>
+          <TableRow>
+              <TableCell
+                colSpan={7}
+                sx={{
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  fontSize: '18px',
+                  backgroundColor: '#09362f',
+                  color:"white"
+                }}
+              >
+                Active Users
+              </TableCell>
+            </TableRow>
             <TableRow sx={{ backgroundColor: "#09362f"}}>
               {["S No. #", "Full Name", "User Name","Gender" , "Email", "Phone Number", "Address"].map((head) => (
                 <TableCell
