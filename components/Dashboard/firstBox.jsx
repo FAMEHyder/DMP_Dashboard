@@ -33,7 +33,6 @@ export default function FirstBox() {
                         alignItems: 'center',
                         padding: 2,
                         gap: 2,
-                        // bgcolor: "#09362f",
                         background: "#ffffff",
                         justifyContent: 'space-between',
                         boxShadow:"2px 2px 2px 2px gray"
