@@ -10,7 +10,9 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 // import PublicIcon from '@mui/icons-material/Public'; 
 export default function FirstBox() {
     return (
-        
+        <Box sx={{border:".5px solid gray",width:"95%",ml:3.5,mt:2,borderRadius:"2px"}}>
+            <Typography sx={{fontSize:25, fontWeight:800,textAlign:"center", color:"gray"}}>Sat-Tara Dashboard Overview</Typography>
+
         <Box
             width={'97%'}
 
@@ -119,6 +121,7 @@ export default function FirstBox() {
                 </Paper>
             </Box>
 
+        </Box>
         </Box>
     );
 }
