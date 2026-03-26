@@ -39,9 +39,7 @@ export default function FirstBox() {
                         boxShadow:"2px 2px 2px 2px gray"
                     }}
                 >
-                    {/* <GroupsIcon fontSize="large" color="primary" /> */}
                     <FacebookIcon fontSize="large" color="primary" />
-                    {/* <PublicIcon fontSize="large" color="primary" /> */}
                     <Box>
                         <Typography variant="subtitle1" color='primary' fontWeight={800}>Connected Facebook Pages</Typography>
                         <Typography variant="h6" sx={{ textAlign: 'end' }} color='primary' fontWeight={800}>15079</Typography>
