@@ -1,26 +1,146 @@
 
+// 'use client';
+
+// import React, { useState } from 'react';
+// import {
+//   Box,
+//   Table, TableBody, TableCell, TableContainer, TableHead,
+//   TableRow, Paper, Typography, Chip
+// } from '@mui/material';
+
+// const ConnectedPages = () => {
+//   const [connect] = useState([
+//     { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft: "60 days", rotate: "Rotated" },
+//     { PageNumber: '2', PageName: 'Ali Store', connectAt: "01-03-2026", expiresOn: "01-04-2026", DaysLeft: "5 days", rotate: "Rotate Now" },
+//     { PageNumber: '3', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft: "34 days", rotate: "Rotated" },
+//     { PageNumber: '4', PageName: 'Ali Store', connectAt: "01-03-2026", expiresOn: "01-04-2026", DaysLeft: "5 days", rotate: "Rotate Now" },
+//     { PageNumber: '5', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft: "30 days", rotate: "Rotated" },
+//     { PageNumber: '6', PageName: 'Ali Store', connectAt: "01-03-2026", expiresOn: "01-04-2026", DaysLeft: "5 days", rotate: "Rotate Now" },
+//   ]);
+
+//   return (
+//     <Box m={3}>
+
+//       <TableContainer
+//         component={Paper}
+//         sx={{
+//           boxShadow: "2px 2px 2px 2px gray",
+//         }}
+//       >
+//         <Table
+//           sx={{
+//             border: '1px solid #ccc',
+//             borderCollapse: 'collapse',
+//             '& th, & td': {
+//               border: '1px solid black',
+//             },
+//           }}
+//         >
+//           <TableHead>
+//             <TableRow>
+//               <TableCell
+//                 colSpan={6}
+//                 sx={{
+//                   textAlign: 'center',
+//                   fontWeight: 'bold',
+//                   fontSize: '18px',
+//                   backgroundColor: '#09362f',
+//                   color: "white" 
+
+//                 }}
+//               >
+//                 Connected Facebook Pages
+//               </TableCell>
+//             </TableRow>
+//             <TableRow sx={{ backgroundColor: "#09362f" }}>
+//               {["Page #", "Page Name", "Connected On", "Expires On", "Days Left", "Token Rotate"].map((head) => (
+//                 <TableCell
+//                   key={head}
+//                   sx={{
+//                     color: '#fff',
+//                     fontWeight: 'bold',
+//                     textAlign: 'center',
+//                     border: '1px solid #ccc',
+//                   }}
+//                 >
+//                   {head}
+//                 </TableCell>
+//               ))}
+//             </TableRow>
+//           </TableHead>
+
+//           <TableBody>
+//             {connect.map((row, index) => (
+//               <TableRow
+//                 key={index}
+//                 sx={{
+//                   backgroundColor: index % 2 === 0 ? '#f9f9f9' : '#fff',
+//                   '&:hover': {
+//                     backgroundColor: '#e3f2fd',
+//                   },
+//                 }}
+//               >
+//                 <TableCell align="center">{row.PageNumber}</TableCell>
+//                 <TableCell align="center">{row.PageName}</TableCell>
+//                 <TableCell align="center">{row.connectAt}</TableCell>
+//                 <TableCell align="center">{row.expiresOn}</TableCell>
+
+//                 <TableCell align="center">
+//                   <Chip
+//                     label={row.DaysLeft}
+//                     color={row.DaysLeft.includes('5') ? 'error' : 'success'}
+//                     size="small"
+//                   />
+//                 </TableCell>
+
+//                 <TableCell align="center">
+//                   <Chip
+//                     label={row.rotate}
+//                     color={row.rotate === 'yes' ? 'success' : 'default'}
+//                     size="small"
+//                   />
+//                 </TableCell>
+//               </TableRow>
+//             ))}
+//           </TableBody>
+//         </Table>
+//       </TableContainer>
+//     </Box>
+//   );
+// };
+
+// export default ConnectedPages;
+
+
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
   Box,
   Table, TableBody, TableCell, TableContainer, TableHead,
-  TableRow, Paper, Typography, Chip
+  TableRow, Paper, Chip
 } from '@mui/material';
 
 const ConnectedPages = () => {
-  const [connect] = useState([
-    { PageNumber: '1', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft: "60 days", rotate: "Rotated" },
-    { PageNumber: '2', PageName: 'Ali Store', connectAt: "01-03-2026", expiresOn: "01-04-2026", DaysLeft: "5 days", rotate: "Rotate Now" },
-    { PageNumber: '3', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft: "34 days", rotate: "Rotated" },
-    { PageNumber: '4', PageName: 'Ali Store', connectAt: "01-03-2026", expiresOn: "01-04-2026", DaysLeft: "5 days", rotate: "Rotate Now" },
-    { PageNumber: '5', PageName: 'haji ali', connectAt: "02-04-2026", expiresOn: "02-06-2026", DaysLeft: "30 days", rotate: "Rotated" },
-    { PageNumber: '6', PageName: 'Ali Store', connectAt: "01-03-2026", expiresOn: "01-04-2026", DaysLeft: "5 days", rotate: "Rotate Now" },
-  ]);
+
+  const [pages, setPages] = useState([]);
+
+  // ✅ API CALL
+  useEffect(() => {
+    axios
+      .get("https://sat-tara-backend.vercel.app/api/pages/facebook")
+      .then(res => {
+        console.log("res is :", res.data)
+        setPages(res.data.pages || []);
+      })
+      .catch(err => {
+        console.error("Error fetching pages:", err);
+      });
+  }, []);
 
   return (
     <Box m={3}>
-
       <TableContainer
         component={Paper}
         sx={{
@@ -37,42 +157,45 @@ const ConnectedPages = () => {
           }}
         >
           <TableHead>
+
+            {/* 🔥 Top Heading */}
             <TableRow>
               <TableCell
-                colSpan={6}
+                colSpan={7}
                 sx={{
                   textAlign: 'center',
                   fontWeight: 'bold',
                   fontSize: '18px',
                   backgroundColor: '#09362f',
-                  color: "white" 
-
+                  color: "white"
                 }}
               >
                 Connected Facebook Pages
               </TableCell>
             </TableRow>
+
+            {/* 🔥 Column Headers */}
             <TableRow sx={{ backgroundColor: "#09362f" }}>
-              {["Page #", "Page Name", "Connected On", "Expires On", "Days Left", "Token Rotate"].map((head) => (
+              {["P-N", "Page Name", "Connected On", "T-Issued On", "T-Expires On", "Days Left", "Token Rotate"].map((head) => (
                 <TableCell
                   key={head}
                   sx={{
                     color: '#fff',
                     fontWeight: 'bold',
                     textAlign: 'center',
-                    border: '1px solid #ccc',
                   }}
                 >
                   {head}
                 </TableCell>
               ))}
             </TableRow>
+
           </TableHead>
 
           <TableBody>
-            {connect.map((row, index) => (
+            {pages.map((row, index) => (
               <TableRow
-                key={index}
+                key={row._id || index}
                 sx={{
                   backgroundColor: index % 2 === 0 ? '#f9f9f9' : '#fff',
                   '&:hover': {
@@ -80,29 +203,52 @@ const ConnectedPages = () => {
                   },
                 }}
               >
-                <TableCell align="center">{row.PageNumber}</TableCell>
-                <TableCell align="center">{row.PageName}</TableCell>
-                <TableCell align="center">{row.connectAt}</TableCell>
-                <TableCell align="center">{row.expiresOn}</TableCell>
+                <TableCell align="center">{row.pageNumber}</TableCell>
+                <TableCell align="center">{row.pageName}</TableCell>
+                <TableCell align="center">
+                  {new Date(row.connectedAt).toLocaleDateString()}
+                </TableCell>
+                <TableCell align="center">
+                  {new Date(row.tokenIssuedAt).toLocaleDateString()}
+                </TableCell>
+                <TableCell align="center">
+                  {new Date(row.tokenExpiresAt).toLocaleDateString()}
+                </TableCell>
 
+                {/* ✅ Days Left */}
                 <TableCell align="center">
                   <Chip
-                    label={row.DaysLeft}
-                    color={row.DaysLeft.includes('5') ? 'error' : 'success'}
+                    label={`${row.daysLeft} days`}
+                    color={
+                      row.daysLeft <= 5
+                        ? 'error'
+                        : row.daysLeft <= 15
+                          ? 'warning'
+                          : 'success'
+                    }
                     size="small"
                   />
                 </TableCell>
 
+                {/* ✅ Status / Rotate */}
                 <TableCell align="center">
                   <Chip
-                    label={row.rotate}
-                    color={row.rotate === 'yes' ? 'success' : 'default'}
+                    label={row.status}
+                    color={
+                      row.status === "expired"
+                        ? "error"
+                        : row.status === "expiring-soon"
+                          ? "warning"
+                          : "success"
+                    }
                     size="small"
                   />
                 </TableCell>
+
               </TableRow>
             ))}
           </TableBody>
+
         </Table>
       </TableContainer>
     </Box>

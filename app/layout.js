@@ -3,6 +3,15 @@ import Sidebar from "./Sidebar/page.jsx";
 import { Box, Typography } from '@mui/material';
 import "./layout.css"
 
+export const metadata = {
+  title: "SDMC Dashboard",
+  icons:{
+    icon:[
+      {url:'/original.jpg'},
+      // {url:'/removed.png'}
+    ]
+  }
+};
 
 export default function RootLayout({ children }) {
 

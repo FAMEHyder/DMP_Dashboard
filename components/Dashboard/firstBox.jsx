@@ -42,7 +42,7 @@ export default function FirstBox() {
                     {/* <PublicIcon fontSize="large" color="primary" /> */}
                     <Box>
                         <Typography variant="subtitle1" color='primary' fontWeight={800}>Connected Facebook Pages</Typography>
-                        <Typography variant="h6" sx={{ textAlign: 'end' }} color='primary' fontWeight={800}>5000</Typography>
+                        <Typography variant="h6" sx={{ textAlign: 'end' }} color='primary' fontWeight={800}>15079</Typography>
                     </Box>
                 </Paper>
 
@@ -65,7 +65,7 @@ export default function FirstBox() {
                     <ReplayIcon fontSize="large" color="secondary" />
                     <Box>
                         <Typography variant="subtitle1" color='purple' fontWeight={800}>Token Rotation Required Pages</Typography>
-                        <Typography variant="h6" sx={{ textAlign: 'end' }} color='purple' fontWeight={800}>5000</Typography>
+                        <Typography variant="h6" sx={{ textAlign: 'end' }} color='purple' fontWeight={800}>139</Typography>
                     </Box>
                 </Paper>
             </Box>
@@ -91,7 +91,7 @@ export default function FirstBox() {
                     <GroupsIcon fontSize="large" color="success" />
                     <Box >
                         <Typography variant="subtitle1" color='green' fontWeight={800}>Active Users</Typography>
-                        <Typography variant="h6" sx={{ textAlign: 'end' }} color='green' fontWeight={800}>5000</Typography>
+                        <Typography variant="h6" sx={{ textAlign: 'end' }} color='green' fontWeight={800}>10014</Typography>
                     </Box>
                 </Paper>
 
@@ -114,7 +114,7 @@ export default function FirstBox() {
                     <AccessTimeIcon fontSize="large" color="error" />
                     <Box>
                         <Typography variant="subtitle1" color='red' fontWeight={800}>Expired pages</Typography>
-                        <Typography variant="h6" sx={{ textAlign: 'end' }} color='red' fontWeight={800}>5000</Typography>
+                        <Typography variant="h6" sx={{ textAlign: 'end' }} color='red' fontWeight={800}>75</Typography>
                     </Box>
                 </Paper>
             </Box>
