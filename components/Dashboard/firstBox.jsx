@@ -8,7 +8,7 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 export default function FirstBox() {
     return (
-        <Box sx={{border:".5px solid gray",width:"95%",ml:3.5,mt:2,borderRadius:"2px"}}>
+        <Box sx={{boxShadow:"2px 2px 2px 2px gray",width:"95%",ml:3.5,mt:2,borderRadius:"2px"}}>
             <Typography sx={{fontSize:25, fontWeight:800,textAlign:"center", color:"gray"}}>Sat-Tara Dashboard Overview</Typography>
 
         <Box
@@ -33,7 +33,7 @@ export default function FirstBox() {
                         gap: 2,
                         background: "#ffffff",
                         justifyContent: 'space-between',
-                        boxShadow:"2px 2px 2px 2px gray"
+                        border:" .5px solid gray"
                     }}
                 >
                     <FacebookIcon fontSize="large" color="primary" />
@@ -53,7 +53,7 @@ export default function FirstBox() {
                         gap: 2,
                         background: "#ffffff",
                         justifyContent: 'space-between',
-                        boxShadow:"2px 2px 2px 2px gray"
+                        border:" .5px solid gray"
 
 
                     }}
@@ -78,7 +78,7 @@ export default function FirstBox() {
                         gap: 2,
                         background: "#ffffff",
                         justifyContent: 'space-between',
-                        boxShadow:"2px 2px 2px 2px gray"
+                        border:" .5px solid gray"
 
 
                     }}
@@ -100,7 +100,7 @@ export default function FirstBox() {
                         gap: 2,
                         background: "#ffffff",
                         justifyContent: 'space-between',
-                        boxShadow:"2px 2px 2px 2px gray"
+                        border:" .5px solid gray"
 
 
                     }}
