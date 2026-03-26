@@ -52,7 +52,6 @@ export default function FirstBox() {
                         padding: 2,
                         gap: 2,
                         background: "#ffffff",
-
                         justifyContent: 'space-between',
                         boxShadow:"2px 2px 2px 2px gray"
 
