@@ -12,7 +12,6 @@ const ConnectedPages = () => {
 
   const [pages, setPages] = useState([]);
 
-  // ✅ API CALL
   useEffect(() => {
     axios
       .get("https://sat-tara-backend.vercel.app/api/pages/facebook")
@@ -44,7 +43,6 @@ const ConnectedPages = () => {
         >
           <TableHead>
 
-            {/* 🔥 Top Heading */}
             <TableRow>
               <TableCell
                 colSpan={7}
