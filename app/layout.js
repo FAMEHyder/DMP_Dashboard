@@ -7,8 +7,8 @@ export const metadata = {
   title: "SDMC Dashboard",
   icons:{
     icon:[
-      {url:'/orignal.jpg'},
-      // {url:'/removed.png'}
+      // {url:'/orignal.jpg'},
+      {url:'/removed.png'}
     ]
   }
 };
