@@ -58,7 +58,6 @@ const ConnectedPages = () => {
               </TableCell>
             </TableRow>
 
-            {/* 🔥 Column Headers */}
             <TableRow sx={{ backgroundColor: "#09362f" }}>
               {["P-N", "Page Name", "Connected On", "T-Issued On", "T-Expires On", "Days Left", "Token Rotate"].map((head) => (
                 <TableCell
