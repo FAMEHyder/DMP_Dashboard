@@ -7,7 +7,6 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import ReplayIcon from '@mui/icons-material/Replay';
 import UndoIcon from '@mui/icons-material/Undo';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-// import PublicIcon from '@mui/icons-material/Public'; 
 export default function FirstBox() {
     return (
         <Box sx={{border:".5px solid gray",width:"95%",ml:3.5,mt:2,borderRadius:"2px"}}>
