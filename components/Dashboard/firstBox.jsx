@@ -5,7 +5,6 @@ import { Box, Paper, Typography } from '@mui/material';
 import GroupsIcon from '@mui/icons-material/Groups';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import ReplayIcon from '@mui/icons-material/Replay';
-import UndoIcon from '@mui/icons-material/Undo';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 export default function FirstBox() {
     return (
