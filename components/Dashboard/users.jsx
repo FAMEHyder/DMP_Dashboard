@@ -53,7 +53,7 @@ const ConnectedPages = () => {
               </TableCell>
             </TableRow>
             <TableRow sx={{ backgroundColor: "#09362f"}}>
-              {["S No. #", "Full Name", "User Name","Gender" , "Email", "Phone Number", "Address"].map((head) => (
+              {["S No. #", "Full Name", "User Name","DOB" , "Email", "Phone Number", "Address"].map((head) => (
                 <TableCell
                   key={head}
                   sx={{
