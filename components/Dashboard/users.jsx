@@ -18,7 +18,7 @@ const ConnectedPages = () => {
       .get("https://sat-tara-backend.vercel.app/api/user/getAllUsers")
       .then((res) => {
         console.log("users are : ",res.data);
-        setUsers(res.data.pages || []);
+        setUsers(res.data.users || []);
       })
       .catch((err) => {
         console.error("API Error:", err);
