@@ -15,7 +15,7 @@ const ConnectedPages = () => {
   // ✅ API CALL
   useEffect(() => {
     axios
-      .get("https://sat-tara-backend.vercel.app/api/pages/facebook")
+      .get("https://sat-tara-backend.vercel.app/api/user/getAllUsers")
       .then((res) => {
         console.log(res.data); // debug
         setUsers(res.data.pages || []);
