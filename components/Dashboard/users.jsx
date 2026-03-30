@@ -1,32 +1,36 @@
-
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
   Box,
   Table, TableBody, TableCell, TableContainer, TableHead,
-  TableRow, Paper, Typography, Chip
+  TableRow, Paper, Typography
 } from '@mui/material';
 
 const ConnectedPages = () => {
-  const [connect] = useState([
-    { SerialNo :"1", FullName:"M ali" ,UserName: 'lee',Gender :"male", email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd",},
-    { SerialNo :"2", FullName:"M ali" ,UserName: 'lee',Gender :"male", email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd",},
-    { SerialNo :"3", FullName:"M ali" ,UserName: 'lee',Gender :"male", email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd",},
-    { SerialNo :"4", FullName:"M ali" ,UserName: 'lee',Gender :"male", email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd",},
-    { SerialNo :"5", FullName:"M ali" ,UserName: 'lee',Gender :"male", email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd",},
-    { SerialNo :"6", FullName:"M ali" ,UserName: 'lee',Gender :"male", email: 'abc@gmail.com', phoneNumber: '341341211211', Adress: "hassan colony skd",},
 
-  ]);
+  const [users, setUsers] = useState([]);
+
+  // ✅ API CALL
+  useEffect(() => {
+    axios
+      .get("https://sat-tara-backend.vercel.app/api/pages/facebook")
+      .then((res) => {
+        console.log(res.data); // debug
+        setUsers(res.data.pages || []);
+      })
+      .catch((err) => {
+        console.error("API Error:", err);
+      });
+  }, []);
 
   return (
     <Box m={3}>
 
       <TableContainer
         component={Paper}
-        sx={{
-          boxShadow: "2px 2px 2px 2px gray",
-        }}
+        sx={{ boxShadow: "2px 2px 2px 2px gray" }}
       >
         <Table
           sx={{
@@ -37,8 +41,11 @@ const ConnectedPages = () => {
             },
           }}
         >
+
+          {/* ✅ TABLE HEADER */}
           <TableHead>
-          <TableRow>
+
+            <TableRow>
               <TableCell
                 colSpan={7}
                 sx={{
@@ -46,50 +53,61 @@ const ConnectedPages = () => {
                   fontWeight: 'bold',
                   fontSize: '18px',
                   backgroundColor: '#09362f',
-                  color:"white"
+                  color: "white"
                 }}
               >
                 Active Users
               </TableCell>
             </TableRow>
-            <TableRow sx={{ backgroundColor: "#09362f"}}>
-              {["S No. #", "Full Name", "User Name","DOB" , "Email", "Phone Number", "Address"].map((head) => (
+
+            <TableRow sx={{ backgroundColor: "#09362f" }}>
+              {["S No.", "Full Name", "User Name", "DOB", "Email", "Phone Number", "Address"].map((head) => (
                 <TableCell
                   key={head}
                   sx={{
                     color: '#fff',
                     fontWeight: 'bold',
                     textAlign: 'center',
-                    border: '1px solid #ccc', // ensure header borders
                   }}
                 >
                   {head}
                 </TableCell>
               ))}
             </TableRow>
+
           </TableHead>
 
+          {/* ✅ TABLE BODY */}
           <TableBody>
-            {connect.map((row, index) => (
-              <TableRow
-                key={index}
-                sx={{
-                  backgroundColor: index % 2 === 0 ? '#f9f9f9' : '#fff',
-                  '&:hover': {
-                    backgroundColor: '#e3f2fd',
-                  },
-                }}
-              >
-                <TableCell align="center">{row.SerialNo}</TableCell>
-                <TableCell align="center">{row.FullName}</TableCell>
-                <TableCell align="center">{row.UserName}</TableCell>
-                <TableCell align="center">{row.Gender}</TableCell>
-                <TableCell align="center">{row.email}</TableCell>
-                <TableCell align="center">{row.phoneNumber}</TableCell>
-                <TableCell align="center">{row.Adress}</TableCell>
+
+            {users.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={7} align="center">
+                  No Data Found
+                </TableCell>
               </TableRow>
-            ))}
+            ) : (
+              users.map((user, index) => (
+                <TableRow
+                  key={index}
+                  sx={{
+                    backgroundColor: index % 2 === 0 ? '#f9f9f9' : '#fff',
+                    '&:hover': { backgroundColor: '#e3f2fd' },
+                  }}
+                >
+                  <TableCell align="center">{index + 1}</TableCell>
+                  <TableCell align="center">{user.fullName}</TableCell>
+                  <TableCell align="center">{user.userName}</TableCell>
+                  <TableCell align="center">{user.dob || "-"}</TableCell>
+                  <TableCell align="center">{user.email}</TableCell>
+                  <TableCell align="center">{user.phoneNumber}</TableCell>
+                  <TableCell align="center">{user.address}</TableCell>
+                </TableRow>
+              ))
+            )}
+
           </TableBody>
+
         </Table>
       </TableContainer>
     </Box>
