@@ -17,7 +17,7 @@ const ConnectedPages = () => {
     axios
       .get("https://sat-tara-backend.vercel.app/api/user/getAllUsers")
       .then((res) => {
-        console.log(res.data);
+        console.log("users are : ",res.data);
         setUsers(res.data.pages || []);
       })
       .catch((err) => {
