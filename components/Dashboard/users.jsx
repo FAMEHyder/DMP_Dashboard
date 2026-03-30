@@ -5,25 +5,34 @@ import axios from 'axios';
 import {
   Box,
   Table, TableBody, TableCell, TableContainer, TableHead,
-  TableRow, Paper, Typography
+  TableRow, Paper, Typography, Skeleton
 } from '@mui/material';
 
 const ConnectedPages = () => {
 
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true); // ✅ loading state
 
   // ✅ API CALL
   useEffect(() => {
     axios
       .get("https://sat-tara-backend.vercel.app/api/user/getAllUsers")
       .then((res) => {
-        console.log("users are : ",res.data);
-        setUsers(res.data.users || []);
+        setUsers(res.data.pages || []);
+        setLoading(false);
       })
       .catch((err) => {
         console.error("API Error:", err);
+        setLoading(false);
       });
   }, []);
+
+  // ✅ Date Format Function
+  const formatDate = (date) => {
+    if (!date) return "-";
+    return new Date(date).toLocaleDateString("en-GB"); 
+    // format: 21/08/2003
+  };
 
   return (
     <Box m={3}>
@@ -42,7 +51,7 @@ const ConnectedPages = () => {
           }}
         >
 
-          {/* ✅ TABLE HEADER */}
+          {/* HEADER */}
           <TableHead>
 
             <TableRow>
@@ -77,10 +86,21 @@ const ConnectedPages = () => {
 
           </TableHead>
 
-          {/* ✅ TABLE BODY */}
+          {/* BODY */}
           <TableBody>
 
-            {users.length === 0 ? (
+            {/* ✅ LOADING SKELETON */}
+            {loading ? (
+              [...Array(5)].map((_, index) => (
+                <TableRow key={index}>
+                  {[...Array(7)].map((_, i) => (
+                    <TableCell key={i}>
+                      <Skeleton variant="text" />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : users.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={7} align="center">
                   No Data Found
@@ -98,7 +118,12 @@ const ConnectedPages = () => {
                   <TableCell align="center">{index + 1}</TableCell>
                   <TableCell align="center">{user.fullName}</TableCell>
                   <TableCell align="center">{user.userName}</TableCell>
-                  <TableCell align="center">{user.dob || "-"}</TableCell>
+
+                  {/* ✅ FIXED DOB FORMAT */}
+                  <TableCell align="center">
+                    {formatDate(user.dob)}
+                  </TableCell>
+
                   <TableCell align="center">{user.email}</TableCell>
                   <TableCell align="center">{user.phoneNumber}</TableCell>
                   <TableCell align="center">{user.address}</TableCell>
