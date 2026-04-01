@@ -21,7 +21,6 @@ import {
 } from '@mui/icons-material';
 import Link from 'next/link';
 
-// csdccsdc
 
 const sidebarItems = [
   { label: 'Dashboard', icon: <Dashboard />, path: '/Dashboard' },
