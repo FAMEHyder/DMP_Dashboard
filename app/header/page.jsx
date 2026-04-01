@@ -44,8 +44,7 @@ const Navbar = () => {
 
   // MORE DROPDOWN ITEMS
   const moreItems = [
-    { label: "PRIVACY POLICY", path: "/PrivacyPolicy" },
-    { label: "INSTRUCTION", path: "/User-data-deletion-instruction" },
+
     { label: "PROFILE", path: "/Profile" },
     { label: "LOGOUT", path: "/logout" },
   ];
