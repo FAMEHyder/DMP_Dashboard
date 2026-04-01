@@ -1,19 +1,35 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import {Button, Chip} from "@mui/material";
 
 import axios from 'axios';
 import {
   Box,
   Table, TableBody, TableCell, TableContainer, TableHead,
-  TableRow, Paper, Chip, Skeleton
+  TableRow, Paper, Chip, Skeleton, Button,
 } from '@mui/material';
 
 const ConnectedPages = () => {
 
   const [pages, setPages] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const handleRotate = async (pageId) => {
+    try {
+      const res = await axios.post(
+        `https://sat-tara-backend.vercel.app/api/pages/rotate-token/${pageId}`
+      );
+
+      alert("Token Rotated Successfully 🔥");
+
+      // 🔄 reload data
+      window.location.reload();
+
+    } catch (error) {
+      console.error("Rotate Error:", error);
+      alert("Rotation Failed ❌");
+    }
+  };
 
   useEffect(() => {
     axios
