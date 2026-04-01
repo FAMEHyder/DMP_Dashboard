@@ -114,7 +114,7 @@ const BufferStyleScheduler = () => {
 
       // ✅ SAME API (RANGE BASED)
       await axios.post(
-        "https://sat-tara-backend.vercel.app/api/post/post-by-range",
+        "https://sat-tara-backend.vercel.app/api/pages/directFacebook/post-photo",
         fd
       );
 
