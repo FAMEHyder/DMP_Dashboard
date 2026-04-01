@@ -29,7 +29,7 @@ const sidebarItems = [
   { label: 'TRR Pages', icon: <Settings />, path: '/TRR' },
   { label: 'Post & Schedual', icon: <Money />, path: '/Post' },
   { label: 'Active Users', icon: <SyncAlt />, path: '/Users' },
-  { label: 'Complain', icon: <Description />, path: '/quotations' },
+  { label: 'Connect Channals', icon: <Description />, path: '/Channals' },
   { label: 'Suggestion', icon: <ShoppingCart />, path: '/purchase' },
   { label: 'Reviews', icon: <Reviews />, path: '/reviews' },
   { label: 'Reports', icon: <Assessment />, path: '/reports' },
