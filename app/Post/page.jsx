@@ -5,12 +5,7 @@ import axios from "axios";
 import {
   Box,
   Typography,
-  TextField,
-  Button,
-  Grid,
-  Tabs,
-  Tab,
-} from "@mui/material";
+  TextField, Button, Grid,Tabs,Tab,} from "@mui/material";
 import CreatePostModal from "../Post_Model/page.jsx";
 
 const POST_TYPES = { PHOTO: 0, REEL: 1, STORY: 2, SCHEDULE: 3 };
@@ -34,13 +29,6 @@ const BufferStyleScheduler = () => {
   const [lastDate, setLastDate] = useState(new Date());
 
   const scheduleRef = useRef(null);
-
-  // ✅ Fetch pages
-  useEffect(() => {
-    axios
-      .get("https://sat-tara-backend.vercel.app/api/pages/facebook")
-      .then((res) => setPages(res.data.pages || []));
-  }, []);
 
   // ✅ Media validation
   useEffect(() => {
@@ -114,7 +102,8 @@ const BufferStyleScheduler = () => {
 
       // ✅ SAME API (RANGE BASED)
       await axios.post(
-        "https://sat-tara-backend.vercel.app/api/pages/directFacebook/post-photo",
+        "https://sat-tara-backend.vercel.app/api/pages/postByPageNumber/post-photo",
+        // "http://localhost:8000/api/postByPageNumber/post-photo",
         fd
       );
 
