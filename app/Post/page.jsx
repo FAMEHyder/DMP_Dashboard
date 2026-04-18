@@ -5,22 +5,30 @@ import axios from "axios";
 import {
   Box,
   Typography,
-  TextField, Button, Grid,Tabs,Tab,} from "@mui/material";
+  TextField,
+  Button,
+  Grid,
+  Tabs,
+  Tab,
+} from "@mui/material";
 import CreatePostModal from "../Post_Model/page.jsx";
 
 const POST_TYPES = { PHOTO: 0, REEL: 1, STORY: 2, SCHEDULE: 3 };
-
 const TIMES = ["08:41 PM", "09:41 PM", "10:51 PM"];
 
-const BufferStyleScheduler = () => {
+const Scheduler = () => {
   const [pages, setPages] = useState([]);
   const [content, setContent] = useState("");
   const [media, setMedia] = useState(null);
   const [postType, setPostType] = useState(POST_TYPES.PHOTO);
 
-  // ✅ RANGE STATES
   const [fromPage, setFromPage] = useState("");
   const [toPage, setToPage] = useState("");
+
+  const [secretKey, setSecretKey] = useState("");
+
+  // 🔥 LOADING STATE
+  const [loading, setLoading] = useState(false);
 
   const [openModal, setOpenModal] = useState(false);
   const [activeSlot, setActiveSlot] = useState(null);
@@ -30,7 +38,7 @@ const BufferStyleScheduler = () => {
 
   const scheduleRef = useRef(null);
 
-  // ✅ Media validation
+  // ================= MEDIA VALIDATION =================
   useEffect(() => {
     if (!media) return;
 
@@ -85,31 +93,38 @@ const BufferStyleScheduler = () => {
     }
   };
 
-  // ================= POST HANDLER (RANGE) =================
+  // ================= POST HANDLER =================
   const handlePost = async () => {
     if (!fromPage || !toPage) {
       return alert("Enter Page Range");
     }
 
+    if (!secretKey) {
+      return alert("Secret Key is required");
+    }
+
     try {
+      setLoading(true); // 🔥 START LOADING
+
       const fd = new FormData();
       fd.append("content", content);
       fd.append("fromPage", fromPage);
       fd.append("toPage", toPage);
+      fd.append("secretKey", secretKey);
 
       if (media) fd.append("media", media);
-      
 
-      // ✅ SAME API (RANGE BASED)
       await axios.post(
-        "https://sat-tara-backend.vercel.app/api/pages/postByPageNumber/post-photo",
+        "http://localhost:8000/api/postByPageNumber/post-photo",
         fd
       );
 
-      alert("Posting started 🚀");
+      alert("Posted to Facebook Successfully 🚀");
     } catch (err) {
       console.error(err);
       alert("Posting failed ❌");
+    } finally {
+      setLoading(false); // 🔥 STOP LOADING
     }
   };
 
@@ -117,13 +132,39 @@ const BufferStyleScheduler = () => {
     <Grid
       container
       sx={{
-        height: "72vh",
+        height: "86vh",
         width: "99%",
         mt: 1,
         boxShadow: "2px 2px 2px 2px gray",
       }}
     >
-      <Grid item xs={12} md={9} sx={{ p: 3 }} width ={"100%"}>
+      {/* 🔥 LOADING OVERLAY */}
+      {loading && (
+        <Box
+          sx={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0,0,0,0.6)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 9999,
+            flexDirection: "column",
+            color: "white",
+            fontSize: "18px",
+          }}
+        >
+          🚀 Posting to Facebook Pages...
+          <Typography sx={{ mt: 1, fontSize: "14px", opacity: 0.8 }}>
+            Please wait, this may take a few seconds per page
+          </Typography>
+        </Box>
+      )}
+
+      <Grid item xs={12} md={9} sx={{ p: 3 }} width={"100%"}>
         <Typography variant="h5" fontWeight={700}>
           Schedule a Post
         </Typography>
@@ -192,7 +233,6 @@ const BufferStyleScheduler = () => {
               onChange={(e) => setMedia(e.target.files[0])}
             />
 
-            {/* ✅ RANGE INPUT */}
             <Box display="flex" gap={2} mt={3}>
               <TextField
                 label="From Page No"
@@ -211,13 +251,22 @@ const BufferStyleScheduler = () => {
               />
             </Box>
 
+            <TextField
+              label="Create Secret Key"
+              fullWidth
+              sx={{ mt: 2 }}
+              value={secretKey}
+              onChange={(e) => setSecretKey(e.target.value)}
+            />
+
             <Button
               fullWidth
               variant="contained"
               sx={{ mt: 3 }}
               onClick={handlePost}
+              disabled={loading}
             >
-              Post Now
+              {loading ? "Posting..." : "Post Now"}
             </Button>
           </>
         )}
@@ -226,4 +275,4 @@ const BufferStyleScheduler = () => {
   );
 };
 
-export default BufferStyleScheduler;
+export default Scheduler;
