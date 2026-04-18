@@ -64,7 +64,7 @@ const ConnectedPages = () => {
   const handleRotate = async (pageId) => {
     try {
       await axios.post(
-        `http://localhost:8000/api/facebook/rotatenow/${pageId}`
+        `https://sat-tara-backend.vercel.app/api/pages/facebook/rotatenow/${pageId}`
       );
 
       alert("Token Rotated Successfully 🔥");
