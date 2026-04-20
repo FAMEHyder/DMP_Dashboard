@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import {
   Box,
   Typography,
@@ -11,6 +10,7 @@ import {
   Tabs,
   Tab,
 } from "@mui/material";
+
 import CreatePostModal from "../Post_Model/page.jsx";
 
 const POST_TYPES = { PHOTO: 0, REEL: 1, STORY: 2, SCHEDULE: 3 };
@@ -24,17 +24,18 @@ const Scheduler = () => {
 
   const [fromPage, setFromPage] = useState("");
   const [toPage, setToPage] = useState("");
-
   const [secretKey, setSecretKey] = useState("");
 
-  // 🔥 LOADING STATE
   const [loading, setLoading] = useState(false);
-
-  const [openModal, setOpenModal] = useState(false);
-  const [activeSlot, setActiveSlot] = useState(null);
+  const [progress, setProgress] = useState({ current: 0, total: 0 });
+  const [results, setResults] = useState([]);
+  const [failedPages, setFailedPages] = useState([]);
 
   const [scheduleSlots, setScheduleSlots] = useState([]);
   const [lastDate, setLastDate] = useState(new Date());
+
+  const [openModal, setOpenModal] = useState(false);
+  const [activeSlot, setActiveSlot] = useState(null);
 
   const scheduleRef = useRef(null);
 
@@ -43,7 +44,7 @@ const Scheduler = () => {
     if (!media) return;
 
     if (postType === POST_TYPES.PHOTO && !media.type.startsWith("image")) {
-      alert("Post Photo = IMAGE required");
+      alert("Image required for photo post");
       setMedia(null);
     }
 
@@ -51,7 +52,7 @@ const Scheduler = () => {
       (postType === POST_TYPES.REEL || postType === POST_TYPES.STORY) &&
       !media.type.startsWith("video")
     ) {
-      alert("Reel / Story = VIDEO required");
+      alert("Video required for reel/story");
       setMedia(null);
     }
   }, [media, postType]);
@@ -93,18 +94,23 @@ const Scheduler = () => {
     }
   };
 
-  // ================= POST HANDLER =================
+  // ================= MAIN POST =================
   const handlePost = async () => {
-    if (!fromPage || !toPage) {
-      return alert("Enter Page Range");
-    }
+    if (!fromPage || !toPage) return alert("Enter Page Range");
+    if (!secretKey) return alert("Secret Key required");
 
-    if (!secretKey) {
-      return alert("Secret Key is required");
+    if (
+      (postType === POST_TYPES.REEL || postType === POST_TYPES.STORY) &&
+      !media
+    ) {
+      return alert("Video file required for Reel/Story");
     }
 
     try {
-      setLoading(true); // 🔥 START LOADING
+      setLoading(true);
+      setProgress({ current: 0, total: 0 });
+      setResults([]);
+      setFailedPages([]);
 
       const fd = new FormData();
       fd.append("content", content);
@@ -112,75 +118,229 @@ const Scheduler = () => {
       fd.append("toPage", toPage);
       fd.append("secretKey", secretKey);
 
-      if (media) fd.append("media", media);
-
-      await axios.post(
-        "http://localhost:8000/api/postByPageNumber/post-photo",
-        fd
+      // 🔥 FIX: SEND postType
+      fd.append(
+        "postType",
+        postType === POST_TYPES.PHOTO
+          ? "photo"
+          : postType === POST_TYPES.REEL
+          ? "reel"
+          : postType === POST_TYPES.STORY
+          ? "story"
+          : "text"
       );
 
-      alert("Posted to Facebook Successfully 🚀");
+      if (media) fd.append("media", media);
+
+      const res = await fetch(
+        "http://localhost:8000/api/postByPageNumber/post-photo",
+        {
+          method: "POST",
+          body: fd,
+        }
+      );
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+
+      let buffer = "";
+      let successCount = 0;
+      let failCount = 0;
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+
+        const lines = buffer.split("\n");
+        buffer = lines.pop();
+
+        for (const line of lines) {
+          if (!line) continue;
+
+          const data = JSON.parse(line);
+
+          setProgress({
+            current: data.progress,
+            total: data.total,
+          });
+
+          setResults((prev) => [...prev, data.data]);
+
+          if (data.data.success) {
+            successCount++;
+          } else {
+            failCount++;
+            setFailedPages((prev) => [...prev, data.data]);
+          }
+        }
+      }
+
+      setLoading(false);
+
+      // 🔥 FINAL ALERTS
+      if (successCount > 0 && failCount === 0) {
+        alert(`✅ All posts successful (${successCount})`);
+      } else if (successCount > 0 && failCount > 0) {
+        alert(
+          `⚠️ Partial success\n✅ ${successCount} success\n❌ ${failCount} failed`
+        );
+      } else {
+        alert(`❌ All posts failed (${failCount})`);
+      }
     } catch (err) {
       console.error(err);
+      setLoading(false);
       alert("Posting failed ❌");
-    } finally {
-      setLoading(false); // 🔥 STOP LOADING
+    }
+  };
+
+  // ================= RETRY FAILED =================
+  const retryFailedPosts = async () => {
+    if (!failedPages.length) return alert("No failed posts");
+
+    try {
+      setLoading(true);
+
+      const res = await fetch(
+        "http://localhost:8000/api/postByPageNumber/retry-failed",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            pages: failedPages,
+            content,
+            secretKey,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      setLoading(false);
+
+      if (data.success) {
+        alert("✅ Retry completed successfully");
+        setFailedPages([]);
+      } else {
+        alert("⚠️ Retry completed with issues");
+      }
+    } catch (err) {
+      console.error(err);
+      setLoading(false);
+      alert("Retry failed ❌");
     }
   };
 
   return (
-    <Grid
-      container
-      sx={{
-        height: "86vh",
-        width: "99%",
-        mt: 1,
-        boxShadow: "2px 2px 2px 2px gray",
-      }}
-    >
-      {/* 🔥 LOADING OVERLAY */}
+    <Grid container sx={{ height: "86vh", width: "99%", mt: 1 }}>
       {loading && (
         <Box
           sx={{
             position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
+            inset: 0,
             backgroundColor: "rgba(0,0,0,0.6)",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            color: "#fff",
             zIndex: 9999,
-            flexDirection: "column",
-            color: "white",
-            fontSize: "18px",
           }}
         >
-          🚀 Posting to Facebook Pages...
-          <Typography sx={{ mt: 1, fontSize: "14px", opacity: 0.8 }}>
-            Please wait, this may take a few seconds per page
+          🚀 Posting in progress...
+          <Typography sx={{ mt: 1 }}>
+            {progress.current}/{progress.total}
           </Typography>
         </Box>
       )}
 
-      <Grid item xs={12} md={9} sx={{ p: 3 }} width={"100%"}>
+      <Grid item xs={12} md={9} sx={{ p: 3, boxShadow: "2px 2px 2px 2px black" ,width:"100%"}}>
         <Typography variant="h5" fontWeight={700}>
-          Schedule a Post
+          Scheduler
         </Typography>
 
-        <Tabs
-          value={postType}
-          onChange={(e, v) => setPostType(v)}
-          sx={{ mb: 2 }}
-        >
-          <Tab label="Post Photo" />
-          <Tab label="Post Reel" />
-          <Tab label="Post Story" />
-          <Tab label="Create Schedule" />
+        <Tabs value={postType} onChange={(e, v) => setPostType(v)}>
+          <Tab label="Photo" />
+          <Tab label="Reel" />
+          <Tab label="Story" />
+          <Tab label="Schedule" />
         </Tabs>
 
-        {/* ================= SCHEDULER ================= */}
+        {postType !== POST_TYPES.SCHEDULE && (
+          <>
+            <TextField
+              fullWidth
+              multiline
+              rows={4}
+              label="Content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              sx={{ mt: 2 }}
+            />
+
+            <input
+              type="file"
+              accept="image/*,video/*"
+              onChange={(e) => setMedia(e.target.files[0])}
+            />
+
+            <Box display="flex" gap={2} mt={2}>
+              <TextField
+                label="From Page"
+                type="number"
+                value={fromPage}
+                onChange={(e) => setFromPage(e.target.value)}
+              />
+              <TextField
+                label="To Page"
+                type="number"
+                value={toPage}
+                onChange={(e) => setToPage(e.target.value)}
+              />
+            </Box>
+
+            <TextField
+              fullWidth
+              label="Secret Key"
+              sx={{ mt: 2 }}
+              value={secretKey}
+              onChange={(e) => setSecretKey(e.target.value)}
+            />
+
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 2 }}
+              onClick={handlePost}
+              disabled={loading}
+            >
+              {loading ? "Posting..." : "Post Now"}
+            </Button>
+
+            <Box mt={2}>
+              <Typography>
+                Progress: {progress.current}/{progress.total}
+              </Typography>
+            </Box>
+
+            {failedPages.length > 0 && (
+              <Button
+                fullWidth
+                color="error"
+                variant="outlined"
+                sx={{ mt: 2 }}
+                onClick={retryFailedPosts}
+              >
+                Retry Failed ({failedPages.length})
+              </Button>
+            )}
+          </>
+        )}
+
         {postType === POST_TYPES.SCHEDULE && (
           <Box
             ref={scheduleRef}
@@ -212,63 +372,6 @@ const Scheduler = () => {
               </Box>
             ))}
           </Box>
-        )}
-
-        {/* ================= POST CREATOR ================= */}
-        {postType !== POST_TYPES.SCHEDULE && (
-          <>
-            <TextField
-              label="Write your post"
-              multiline
-              rows={4}
-              fullWidth
-              sx={{ mb: 3 }}
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-
-            <input
-              type="file"
-              accept="image/*,video/*"
-              onChange={(e) => setMedia(e.target.files[0])}
-            />
-
-            <Box display="flex" gap={2} mt={3}>
-              <TextField
-                label="From Page No"
-                type="number"
-                fullWidth
-                value={fromPage}
-                onChange={(e) => setFromPage(e.target.value)}
-              />
-
-              <TextField
-                label="To Page No"
-                type="number"
-                fullWidth
-                value={toPage}
-                onChange={(e) => setToPage(e.target.value)}
-              />
-            </Box>
-
-            <TextField
-              label="Create Secret Key"
-              fullWidth
-              sx={{ mt: 2 }}
-              value={secretKey}
-              onChange={(e) => setSecretKey(e.target.value)}
-            />
-
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3 }}
-              onClick={handlePost}
-              disabled={loading}
-            >
-              {loading ? "Posting..." : "Post Now"}
-            </Button>
-          </>
         )}
       </Grid>
     </Grid>
